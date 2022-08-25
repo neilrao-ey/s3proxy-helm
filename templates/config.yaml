@@ -1,0 +1,22 @@
+{{- if or .Values.configFiles .Values.fixedConfigFiles -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "s3-proxy.fullname" . }}-config
+  labels:
+    app.kubernetes.io/name: {{ include "s3-proxy.name" . }}
+    helm.sh/chart: {{ include "s3-proxy.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+{{- if .Values.fixedConfigFiles -}}
+{{- range $key, $value := .Values.fixedConfigFiles }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}
+{{- if .Values.configFiles -}}
+{{- range $key, $value := .Values.configFiles }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,133 @@
+replicaCount: 1
+
+image:
+  repository: usededcrvlacr01.azurecr.io/andrewgaul/s3proxy
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  name: s3proxy-sa
+  annotations: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: "http"
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    - kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: s3.reveal-dev2.sbp.eyclienthub.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+customTemplates: {}
+
+existingSecret: ""
+
+secretFiles: {}
+
+env: {}
+
+envFrom: []
+
+fixedConfigFiles: {}
+
+configFiles:
+  config.yaml: |-
+    # Log configuration
+    log:
+      # Log level
+      level: info
+      # Log format
+      format: text
+
+    # Targets map
+    targets:
+      first-bucket:
+        ## Mount point
+        mount:
+          path:
+            - /
+        ## Bucket configuration
+        bucket:
+          name: s3-default
+          prefix:
+          region: eu-east-1
+          s3Endpoint:
+          disableSSL: false
+          # credentials:
+          #   accessKey:
+          #     env: AWS_ACCESS_KEY_ID
+          #   secretKey:
+          #     path: secret_key_file
+
+# Sidecars
+# The full container definition is available here.
+sidecars: []
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+## ServiceMonitor configuration in case you are using Prometheus Operator
+prometheus:
+  serviceMonitor:
+    enabled: false
+    labels: {}
+    scheme: http
+    
+# Arbitrary non-identifying metadata for s3-proxy pods.
+podAnnotations: {}
+
+# Extra pod labels.
+podLabels: {}
+
+grafana:
+  operator:
+    enabled: false
+    labels: {}
+  configmap:
+    enabled: false
+    labels: {}
+
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+  maxUnavailable:
+
+deploymentStrategy: {}
+
+podSecurityContext:
+  fsGroup: 1000
+
+volumeMountPaths:
+  configurations: /proxy/conf
+  secrets: /proxy/secret-files
+  customTemplates: /proxy/custom-templates
+
+# This can be used to declare extra volumes.
+extraVolumes: []
+
+# This is for extra mounts in the s3-proxy containers only.
+# Sidecars or init containers have their own declarations.
+extraVolumesMounts: []
+
+# Init containers declarations.
+initContainers: []
+
+# Scheduler name
+schedulerName: ""
+
+# Priority class name.
+priorityClassName: ""
