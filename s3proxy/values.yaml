@@ -83,3 +83,4 @@ affinity: {}
 azure:
   accountName: ""
   accountKey: ""
+  ignoreUnknownHeaders: "true"

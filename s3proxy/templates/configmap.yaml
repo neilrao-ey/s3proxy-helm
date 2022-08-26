@@ -12,3 +12,4 @@ data:
   JCLOUDS_IDENTITY: {{ .Values.azure.accountName | quote }}
   JCLOUDS_CREDENTIAL: {{ .Values.azure.accountKey | quote }}
   JCLOUDS_ENDPOINT: "https://{{ .Values.azure.accountName }}.blob.core.windows.net"
+  S3PROXY_IGNORE_UNKNOWN_HEADERS: {{ .Values.azure.ignoreUnknownHeaders | default "true" }}
