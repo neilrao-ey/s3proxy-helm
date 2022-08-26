@@ -81,6 +81,5 @@ tolerations: []
 affinity: {}
 
 azure:
-  accountName: ""
-  accountKey: ""
+  externalSecretName: ""
   ignoreUnknownHeaders: "true"

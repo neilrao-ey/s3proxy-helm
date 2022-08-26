@@ -1,3 +1,27 @@
+---
+apiVersion: external-secrets.io/v1beta1 
+kind: ExternalSecret
+metadata:
+  name: {{ include "s3proxy.fullname" . }}-secrets
+spec:
+  refreshInterval: 10m
+  secretStoreRef:
+    name: {{ .Values.azure.externalSecretName | quote }}
+    kind: SecretStore
+  target:
+    name: {{ include "s3proxy.fullname" . }}-secrets
+    creationPolicy: Owner
+  data:
+    - secretKey: JCLOUDS_IDENTITY
+      remoteRef:
+        key: s3proxy-account-name
+    - secretKey: JCLOUDS_CREDENTIAL
+      remoteRef:
+        key: s3proxy-secret-key
+    - secretKey: JCLOUDS_ENDPOINT
+      remoteRef:
+        key: s3proxy-endpoint
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,7 +33,4 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
   JCLOUDS_PROVIDER: "azureblob"
-  JCLOUDS_IDENTITY: {{ .Values.azure.accountName | quote }}
-  JCLOUDS_CREDENTIAL: {{ .Values.azure.accountKey | quote }}
-  JCLOUDS_ENDPOINT: "https://{{ .Values.azure.accountName }}.blob.core.windows.net"
   S3PROXY_IGNORE_UNKNOWN_HEADERS: {{ .Values.azure.ignoreUnknownHeaders | default "true" }}

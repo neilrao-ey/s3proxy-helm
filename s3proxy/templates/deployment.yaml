@@ -39,7 +39,9 @@ spec:
               protocol: TCP
           envFrom:
           - configMapRef:
-              name: {{ include "s3proxy.fullname" . }}-config
+            name: {{ include "s3proxy.fullname" . }}-config
+          - secretRef:
+            name: {{ include "s3proxy.fullname" . }}-secrets
           # livenessProbe:
           #   httpGet:
           #     path: /
