@@ -39,4 +39,4 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
   JCLOUDS_PROVIDER: "azureblob"
-  S3PROXY_IGNORE_UNKNOWN_HEADERS: {{ .Values.azure.ignoreUnknownHeaders | default "true" }}
+  S3PROXY_IGNORE_UNKNOWN_HEADERS: {{ .Values.azure.ignoreUnknownHeaders | default "true" | quote }}
