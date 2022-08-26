@@ -14,13 +14,13 @@ spec:
   data:
     - secretKey: JCLOUDS_IDENTITY
       remoteRef:
-        key: s3proxy-account-name
+        key: {{ .Values.azure.identityRef | quote }}
     - secretKey: JCLOUDS_CREDENTIAL
       remoteRef:
-        key: s3proxy-secret-key
+        key: {{ .Values.azure.credentialRef | quote }}
     - secretKey: JCLOUDS_ENDPOINT
       remoteRef:
-        key: s3proxy-endpoint
+        key: {{ .Values.azure.endpointRef | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
