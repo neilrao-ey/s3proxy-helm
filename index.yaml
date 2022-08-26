@@ -3,7 +3,17 @@ entries:
   s3proxy:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-08-25T23:43:00.5987356-05:00"
+    created: "2022-08-26T00:00:28.7269249-05:00"
+    description: A Helm chart for Kubernetes
+    digest: efb83a15d0af39c319a644cc8d2fea27bd985b7ae595c3885e6eac1dd7b0d3bf
+    name: s3proxy
+    type: application
+    urls:
+    - s3proxy-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-08-26T00:00:28.7259668-05:00"
     description: A Helm chart for Kubernetes
     digest: 0dbaf4f87590a0a9c9ebb3397ed95a31a92c27400f7243c7c212e47318e91a4e
     name: s3proxy
@@ -11,4 +21,4 @@ entries:
     urls:
     - s3proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2022-08-25T23:43:00.5974073-05:00"
+generated: "2022-08-26T00:00:28.7244274-05:00"
