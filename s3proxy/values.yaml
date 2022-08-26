@@ -85,4 +85,6 @@ azure:
   identityRef: ""
   credentialRef: ""
   endpointRef: ""
+  s3proxyIdentityRef: ""
+  s3proxyCredentialRef: ""
   ignoreUnknownHeaders: "true"
