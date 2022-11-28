@@ -40,3 +40,4 @@ metadata:
 data:
   JCLOUDS_PROVIDER: "azureblob"
   S3PROXY_IGNORE_UNKNOWN_HEADERS: {{ .Values.azure.ignoreUnknownHeaders | default "true" | quote }}
+  S3PROXY_VIRTUALHOST: {{ .Values.azure.virtualHost | default "" | quote }}

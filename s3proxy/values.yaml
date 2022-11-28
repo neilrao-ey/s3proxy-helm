@@ -88,3 +88,4 @@ azure:
   s3proxyIdentityRef: ""
   s3proxyCredentialRef: ""
   ignoreUnknownHeaders: "true"
+  virtualHost: ""
