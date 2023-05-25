@@ -35,13 +35,17 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           envFrom:
           - configMapRef:
               name: {{ include "s3proxy.fullname" . }}-config
           - secretRef:
               name: {{ include "s3proxy.fullname" . }}-secrets
+          {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           # livenessProbe:
           #   httpGet:
           #     path: /
